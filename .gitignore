@@ -1,3 +1,5 @@
 .vscode/
 *.[oa]
 test*
+server
+client
