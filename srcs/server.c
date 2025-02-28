@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:55:20 by ielyatim          #+#    #+#             */
-/*   Updated: 2025/02/28 11:11:03 by ielyatim         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:33:06 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	sighandler(int signum, siginfo_t *info, void *ctx)
 	if (count == 8)
 	{
 		ft_printf("%c", byte);
+		if (byte == 0)
+			kill(pid, SIGUSR1);
 		count = 0;
 		byte = 0;
 	}
