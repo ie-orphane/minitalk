@@ -15,6 +15,7 @@ SRCS =
 
 OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+MAIN = $(addprefix $(OBJS_DIR)/,$(NAME:=.o))
 
 INCLUDE_DIR = include
 _INCLUDES = main.h
@@ -36,7 +37,7 @@ NO_PRINT = --no-print-directory
 
 all : $(NAME)
 
-$(NAME): $(LIB_FILE) $(OBJS) $(INCLUDES)
+$(NAME): $(LIB_FILE) $(OBJS) $(INCLUDES) $(MAIN)
 	@$(CC) $(addprefix $(SRCS_DIR)/, $(@:=.c)) $(OBJS) $(LFLAGS) $(IFLAGS) -o $(@)
 	@echo "🔗 $(CYAN)$(notdir $(OBJS)) $(@:=.o) $(BLACK)=> $(YELLOW)$(@)$(RESET)"
 
@@ -62,12 +63,16 @@ fclean : clean
 
 re : fclean all
 
-run :
+c:
 	@$(MAKE) $(NO_PRINT) $(DEV_NULL)
-	@./$(NAME) $(ARGS)
+	@./client $(ARGS)
+
+s:
+	@$(MAKE) $(NO_PRINT) $(DEV_NULL)
+	@./server
 
 valgrind :
 	@$(MAKE) $(NO_PRINT) $(DEV_NULL)
-	@valgrind ./$(NAME) $(ARGS)
+	@valgrind ./$(MAIN_ARG)
 
 .PHONY : all clean fclean re run valgrind
