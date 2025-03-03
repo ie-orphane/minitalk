@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:55:16 by ielyatim          #+#    #+#             */
-/*   Updated: 2025/03/03 14:13:15 by ielyatim         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:05:34 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,16 @@ int	main(int argc, char **argv)
 {
 	int	pid;
 
-	(void)argc;
-	pid = ft_atoi(argv[1]);
-	if (pid == -1)
+	if (argc != 3)
+		ft_error();
+	pid = ft_ultimate_atoi(argv[1]);
+	if (pid == -1 || pid == 0)
 		ft_error();
 	signal(SIGUSR1, sighandler);
 	while (true)
 	{
 		byte_send(pid, *argv[2]);
-		if (!*argv[2])
+		if (*argv[2] == '\0')
 			break ;
 		argv[2]++;
 	}
