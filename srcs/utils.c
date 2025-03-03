@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 14:19:04 by ielyatim          #+#    #+#             */
-/*   Updated: 2025/03/03 14:15:45 by ielyatim         ###   ########.fr       */
+/*   Created: 2025/03/03 14:01:25 by ielyatim          #+#    #+#             */
+/*   Updated: 2025/03/03 14:13:30 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "main.h"
 
-# include "libft.h"
-# include <signal.h>
+void	ft_error(void)
+{
+	ft_putstr_fd("❌ Error\n", 2);
+	exit(1);
+}
 
-void	ft_error(void);
-void	ft_kill(pid_t pid, int sig);
+void	ft_kill(pid_t pid, int sig)
+{
+	int	out;
 
-#endif // MAIN_H
+	out = kill(pid, sig);
+	if (out == -1)
+		ft_error();
+}

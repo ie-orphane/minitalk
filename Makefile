@@ -11,7 +11,7 @@ RESET = \033[0m
 NAME = client server
 
 SRCS_DIR = srcs
-SRCS = 
+SRCS = utils.c
 
 OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))

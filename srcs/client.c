@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:55:16 by ielyatim          #+#    #+#             */
-/*   Updated: 2025/03/03 14:04:32 by ielyatim         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:13:15 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	byte_send(int pid, char byte)
 	while (j < 8)
 	{
 		if ((byte & (1 << j)) >> j)
-			kill(pid, SIGUSR1);
+			ft_kill(pid, SIGUSR1);
 		else
-			kill(pid, SIGUSR2);
+			ft_kill(pid, SIGUSR2);
 		usleep(400);
 		j++;
 	}
@@ -40,6 +40,8 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	pid = ft_atoi(argv[1]);
+	if (pid == -1)
+		ft_error();
 	signal(SIGUSR1, sighandler);
 	while (true)
 	{
